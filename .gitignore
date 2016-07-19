@@ -1,0 +1,16 @@
+/.idea
+/app/bootstrap.php.cache
+/app/cache/*
+!app/cache/.gitkeep
+/app/config/parameters.yml
+/app/logs/*
+!app/logs/.gitkeep
+/app/phpunit.xml
+/composer.phar
+/web/bundles/
+/mockup/node_modules/*
+.DS_Store
+.AppleDouble
+.LSOverride
+node_modules
+web/uploads/

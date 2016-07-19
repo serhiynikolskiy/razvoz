@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    <!-- Meta, title, CSS, favicons, etc. -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="{{ asset('apple-touch-icon.png') }}" />
+    <title>{% block title %}{{ 'admin.homepage.meta.title'|trans }}{% endblock %}</title>
+
+    <!-- Bootstrap core CSS -->
+    {% block stylesheets %}
+        <link href="{{ asset('includes/css/style.min.css') }}" rel="stylesheet">
+        {% block last_stylesheet %}{% endblock %}
+    {% endblock %}
+</head>
+
+<body class="top-navigation {% block bodyClass %}{% endblock %}">
+<div id="wrapper">
+    <div id="page-wrapper" class="gray-bg">
+        <div class="border-bottom">
+            <nav class="navbar navbar-static-top white-bg row" role="navigation" style="margin-bottom: 0">
+                <ul class="nav navbar-top-links navbar-right">
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-home"></i> {{ 'Home page'|trans }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" target="_blank">
+                            <i class="fa fa-globe"></i> {{ 'Public page'|trans }}
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i class="fa fa-sign-out"></i> {{ 'Log out'|trans }}
+                        </a>
+                    </li>
+                </ul>
+                <h3 class="col-md-4 welcome-message" style="margin-top: 20px;">{{ 'Welcome to Admin Panel'|trans }}</h3>
+                <h2 class="col-md-4 text-center">{{ '-- MLB PROJECTION TOOL --'|trans }}</h2>
+            </nav>
+        </div>
+
+        <div class="wrapper wrapper-content">
+            {% block flash_messages %}{% include 'mainBlocks/flassMessage.html.twig' %}{% endblock %}
+            <div class="spinner hidden">
+                <div class="rect1"></div>
+                <div class="rect2"></div>
+                <div class="rect3"></div>
+                <div class="rect4"></div>
+                <div class="rect5"></div>
+            </div>
+            {% block body %}{% endblock %}
+            {% block admin_main_menu %}{% include 'adminBlocks/admin_main_menu.html.twig' %}{% endblock %}
+        </div>
+        {% block pageFooter %}{% include 'mainBlocks/footer.html.twig' %}{% endblock %}
+    </div>
+</div>
+
+{% block confirmDelete %}{% include 'mainBlocks/confirmDelete.html.twig' %}{% endblock %}
+
+{% block javascripts %}
+    {% block first_javascript %}{% endblock %}
+    <script src="{{ asset('includes/js/scripts.min.js') }}"></script>
+    {% block last_javascript %}{% endblock %}
+{% endblock %}
+</body>
+</html>
