@@ -1,0 +1,68 @@
+{% extends '::base_admin.html.twig' %}
+
+{% form_theme form ':Form:fields.html.twig' %}
+
+{% block last_stylesheet %}
+    <link href='{{ asset('includes/admin/css/plugins/datapicker/datepicker3.css') }}' rel='stylesheet'>
+    <link href='{{ asset('includes/admin/css/plugins/daterangepicker/daterangepicker-bs3.css') }}' rel='stylesheet'>
+    <link href='{{ asset('includes/admin/css/plugins/awesome-bootstrap-checkbox/awesome-bootstrap-checkbox.css') }}' rel='stylesheet'>
+{% endblock %}
+
+{% block body -%}
+<div class="wrapper wrapper-content animated fadeInRight">
+    <div class="row">
+
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="ibox float-e-margins">
+                <br /> <div class="ibox-content">
+
+                    {{ form(form, {attr: {class: "form-horizontal form-label-left input_mask"}}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+        {% endblock %}
+
+{% block last_javascript %}
+    {% for elem in form %}
+        {% if date_active is not defined and 'date' in elem.vars['block_prefixes'] %}
+            {% set date_active = 'true' %}
+            <script src='{{ asset('includes/admin/js/plugins/fullcalendar/moment.min.js') }}'></script>
+            <script type='text/javascript' src='{{ asset('includes/admin/js/plugins/daterangepicker/daterangepicker.js') }}'></script>
+            <script src='{{ asset('js/plugins/datapicker/bootstrap-datepicker.js') }}'></script>
+            <script type='text/javascript'>
+                $(document).ready(function() {
+                    $('.gns-datepicker').daterangepicker({
+                        singleDatePicker: true,
+                        calender_style: 'picker_4',
+                        format: 'DD-MM-YYYY'
+                    })
+                })
+            </script>
+        {% endif %}
+        {% if checkbox_active is not defined and 'checkbox' in elem.vars['block_prefixes'] %}
+            {% set checkbox_active = 'true' %}
+            <link href='{{ asset('includes/admin/css/switchery/switchery.min.css') }}' rel='stylesheet'>
+        {% endif %}
+        {% if file_active is not defined and 'file' in  elem.vars['block_prefixes'] %}
+            {% set file_active = 'true' %}
+            <link href='{{ asset('includes/admin/css/upload_button.css') }}' rel='stylesheet'>
+            <script type='text/javascript' src='{{ asset('includes/admin/js/filePreview.js') }}'></script>
+        {% endif %}
+        {% if choice_active is not defined and 'choice' in elem.vars['block_prefixes'] %}
+        {% set choice_active = 'true' %}
+            <script type='text/javascript' src='{{ asset('includes/admin/js/select/select2.full.js') }}'></script>
+            <link href='{{ asset('includes/admin/css/select/select2.min.css') }}' rel='stylesheet'>
+            <script>
+                $(document).ready(function () {
+                    $('.select2_multiple').select2({
+                        allowClear: true,
+                        placeholder: 'Make your choice...'
+                    });
+                });
+            </script>
+        {% endif %}
+    {% endfor %}
+{% endblock %}

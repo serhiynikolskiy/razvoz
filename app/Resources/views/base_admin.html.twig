@@ -5,66 +5,113 @@
     <!-- Meta, title, CSS, favicons, etc. -->
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" type="image/x-icon" href="{{ asset('apple-touch-icon.png') }}" />
-    <title>{% block title %}{{ 'admin.homepage.meta.title'|trans }}{% endblock %}</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+
+    <link rel="icon" type="image/x-icon" href="{{ asset('favicon.ico') }}" />
+
+    <title>{% block title %}Artnikol{% endblock %}</title>
 
     <!-- Bootstrap core CSS -->
     {% block stylesheets %}
-        <link href="{{ asset('includes/css/style.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('includes/admin/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('includes/admin/css/animate.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('includes/admin/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('includes/admin/css/plugins/toastr/toastr.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('includes/admin/css/style.css') }}" rel="stylesheet">
+        <link href="{{ asset('includes/admin/css/plugins/dataTables/dataTables.bootstrap.css') }}" rel="stylesheet">
+        <link href="{{ asset('includes/admin/css/plugins/dataTables/dataTables.responsive.css') }}" rel="stylesheet">
+        <link href="{{ asset('includes/admin/css/plugins/dataTables/dataTables.tableTools.min.css') }}" rel="stylesheet"><link href='{{ asset('includes/css/jquery-ui.css') }}' rel='stylesheet'>
+
+
         {% block last_stylesheet %}{% endblock %}
     {% endblock %}
-</head>
+    <script src="../assets/js/ie8-responsive-file-warning.js"></script>
+    <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+    <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
 
-<body class="top-navigation {% block bodyClass %}{% endblock %}">
-<div id="wrapper">
-    <div id="page-wrapper" class="gray-bg">
-        <div class="border-bottom">
-            <nav class="navbar navbar-static-top white-bg row" role="navigation" style="margin-bottom: 0">
+</head>
+<body class="pace-done">
+
+<div class="container body" id="wrapper">
+
+    <nav class="navbar-default navbar-static-side" role="navigation">
+        <div class="sidebar-collapse">
+            <ul class="nav metismenu" id="side-menu">
+                {#<li class="{% if app.request.attributes.get('_route') == 'newscategory' %}active {% endif %}"><a href="{{ path('newscategory') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Категории Новостей</span></a></li>#}
+                {#<li class="{% if app.request.attributes.get('_route') == 'news' %}active {% endif %}"><a href="{{ path('news') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Новости</span></a></li>#}
+                {#<li class="{% if app.request.attributes.get('_route') == 'work-categories' %}active {% endif %}"><a href="{{ path('work-categories') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Категории работ</span></a></li>#}
+                {#<li class="{% if app.request.attributes.get('_route') == 'works' %}active {% endif %}"><a href="{{ path('works') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Работы</span></a></li>#}
+                {#<li class="{% if app.request.attributes.get('_route') == 'mediagalleries' %}active {% endif %}"><a href="{{ path('mediagalleries') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Галереи</span></a></li>#}
+                {#<li class="{% if app.request.attributes.get('_route') == 'reviews' %}active {% endif %}"><a href="{{ path('reviews') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Отзывы</span></a></li>#}
+                <li>
+                    <a href="#"><i class="fa fa-th-large"></i> <span class="nav-label">Дополнительно</span></a>
+                    <ul class="nav nav-second-level collapse">
+                        {#<li class="{% if app.request.attributes.get('_route') == 'followers' %}active {% endif %}"><a href="{{ path('followers') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Подписчики</span></a></li>#}
+                        {#<li class="{% if app.request.attributes.get('_route') == 'donates' %}active {% endif %}"><a href="{{ path('donates') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Оплаты</span></a></li>#}
+                        <li class="{% if app.request.attributes.get('_route') == 'roles' %}active {% endif %}"><a href="{{ path('roles') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Роли</span></a></li>
+                        <li class="{% if app.request.attributes.get('_route') == 'users' %}active {% endif %}"><a href="{{ path('users') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Пользователи</span></a></li>
+                        {#<li class="{% if app.request.attributes.get('_route') == 'pages' %}active {% endif %}"><a href="{{ path('pages') }}"><i class="fa fa-th-large"></i> <span class="nav-label">Страницы</span></a></li>#}
+                    </ul>
+                </li>
+            </ul>
+
+        </div>
+    </nav>
+    <div id="page-wrapper" class="gray-bg dashbard-1" style="min-height: 681px;">
+        <div class="row border-bottom">
+            <nav class="navbar navbar-static-top" role="navigation" style="margin-bottom: 0">
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
-                        <a href="#">
-                            <i class="fa fa-home"></i> {{ 'Home page'|trans }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#" target="_blank">
-                            <i class="fa fa-globe"></i> {{ 'Public page'|trans }}
-                        </a>
-                    </li>
-                    <li>
-                        <a href="#">
-                            <i class="fa fa-sign-out"></i> {{ 'Log out'|trans }}
+                        <a href="/logout">
+                            <i class="fa fa-sign-out"></i> Log out
                         </a>
                     </li>
                 </ul>
-                <h3 class="col-md-4 welcome-message" style="margin-top: 20px;">{{ 'Welcome to Admin Panel'|trans }}</h3>
-                <h2 class="col-md-4 text-center">{{ '-- MLB PROJECTION TOOL --'|trans }}</h2>
+
             </nav>
         </div>
-
-        <div class="wrapper wrapper-content">
-            {% block flash_messages %}{% include 'mainBlocks/flassMessage.html.twig' %}{% endblock %}
-            <div class="spinner hidden">
-                <div class="rect1"></div>
-                <div class="rect2"></div>
-                <div class="rect3"></div>
-                <div class="rect4"></div>
-                <div class="rect5"></div>
+        {% block body %}{% endblock %}
+        {#</div>#}
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="footer">
+                </div>
             </div>
-            {% block body %}{% endblock %}
-            {% block admin_main_menu %}{% include 'adminBlocks/admin_main_menu.html.twig' %}{% endblock %}
         </div>
-        {% block pageFooter %}{% include 'mainBlocks/footer.html.twig' %}{% endblock %}
+
     </div>
 </div>
 
-{% block confirmDelete %}{% include 'mainBlocks/confirmDelete.html.twig' %}{% endblock %}
+<div id="custom_notifications" class="custom-notifications dsp_none">
+    <ul class="list-unstyled notifications clearfix" data-tabbed_notifications="notif-group">
+    </ul>
+    <div class="clearfix"></div>
+    <div id="notif-group" class="tabbed_notifications"></div>
+</div>
 
 {% block javascripts %}
+    <script src="{{ asset('includes/admin/js/jquery-2.1.1.js') }}"></script>
     {% block first_javascript %}{% endblock %}
-    <script src="{{ asset('includes/js/scripts.min.js') }}"></script>
+    <script src='{{ asset('includes/admin/js/plugins/fullcalendar/moment.min.js') }}'></script>
+    <script src="{{ asset('includes/admin/js/bootstrap.min.js') }}"></script>
+    <script src="{{ asset('includes/admin/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+    <script src="{{ asset('includes/admin/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+    <script src="{{ asset('includes/admin/js/plugins/jeditable/jquery.jeditable.js') }}"></script>
+    <script src='{{ asset('includes/admin/js/inspinia.js') }}'></script>
+    <script src='{{ asset('includes/admin/js/jquery-ui-1.10.4.min.js') }}'></script>
+    <script src='{{ asset('includes/admin/js/plugins/datapicker/bootstrap-datepicker.js') }}'></script>
+    <script type='text/javascript'>
+        $(document).ready(function() {
+            $('.date').datepicker({
+                singleDatePicker: true,
+                format: 'dd-mm-yyyy',
+            });
+        });
+    </script>
+
     {% block last_javascript %}{% endblock %}
 {% endblock %}
+
 </body>
+
 </html>
